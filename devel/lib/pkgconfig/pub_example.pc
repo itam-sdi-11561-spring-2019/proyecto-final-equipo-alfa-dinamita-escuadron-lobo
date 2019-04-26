@@ -1,0 +1,8 @@
+prefix=/home/robotica/lab_principios_jch/final/devel
+
+Name: pub_example
+Description: Description of pub_example
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/robotica/lab_principios_jch/final/devel/lib 
+Requires: 
