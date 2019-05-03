@@ -68,3 +68,9 @@ Cada comando se debe ejecutar en orden (primero el 1, al último el 3). El orden
 
 ### 1. escucha_pose
 Diseñado para probar la pose que envía el nodo de visión. Se utilizan los `rosbags`
+
+Para probar este nodo, seguir los siguientes pasos:
+1. Correr `roscore` en una terminal.
+2. En una segunda terminal, correr el comando `rosbag play rosbags/ARCHIVO` donde ARCHIVO es el "bag" que se quiere utilizar.
+3. En una tercer terminal, correr el comando `rosrun escucha_pose escucha_pose_node`
+4. En una cuarta terminal, correr el comando `rostopic echo /pose_dif`
