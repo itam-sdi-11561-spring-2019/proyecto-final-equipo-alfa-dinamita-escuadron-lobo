@@ -64,3 +64,7 @@ rosbag play rosbags/obstacles_5.bag
 
 Cada comando se debe ejecutar en orden (primero el 1, al último el 3). El orden importa porque el primero "roslaunch" se encarga de ejecutar "roscore". Si se quisiera ejecutar sin importar el orden sería necesario tener otra terminal donde se ejecute "roscore".
 
+## Paquetes:
+
+### 1. escucha_pose
+Diseñado para probar la pose que envía el nodo de visión. Se utilizan los `rosbags`
