@@ -1,24 +1,27 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Pose2D.h>
-#include <std_msgs/Float64.h>
-#include <cmath>
 #include <math.h>
 using namespace std;
 
-float x, y, theta, bx, by, bt;
+float x=0, y=0, theta=0, bx=0, by=0, bt=0, dx=0, dy=0;
 
-void callbackPose(const geometry_msgs::Pose2D &pose)
+void callbackPose(const geometry_msgs::Pose2D &poseRobot)
 {
-	x = pose.x;
-	y = pose.y;
-	theta = pose.theta;
+	x = poseRobot.x;
+	y = poseRobot.y;
+	theta = poseRobot.theta;
+	dx = bx-x;
+	dy = by-y;
 }
 
-void callbackBall(const geometry_msgs::Pose2D &pose)
+void callbackBall(const geometry_msgs::Pose2D &poseBall)
 {
-	bx = pose.x;
-	by = pose.y;
-	bt = pose.theta;
+	bx = poseBall.x;
+	by = poseBall.y;
+	bt = poseBall.theta;
+	dx = bx-x;
+	dy = by-y;
+	
 }
 
 int main(int argc, char **argv)
@@ -30,18 +33,23 @@ int main(int argc, char **argv)
 	ros::Subscriber sub_ball = n.subscribe("/ball", 1000, &callbackBall);
 	ros::Publisher pub_dif = n.advertise<geometry_msgs::Pose2D> ("/pose_dif",1);
 	
-	geometry_msgs::Pose2D dif;
+	ros::Rate rate(2);
 	
-	float dx = bx-x;
-	float dy = by-y;
+	geometry_msgs::Pose2D dif;
 	
 	while(ros::ok())
 	{
-		dif.x = sqrt(pow(dx,2)+pow(dy,2));
-		dif.y = 20;
-		dif.theta = atan2(dy,dx);
+		float d, alpha, v, w;
+		d = sqrt(dx*dx+dy*dy);
+		alpha = atan2(dy,dx)-theta-atan(abs(dy/dx));
+		v = d/10;
+		w = alpha/5;
+		dif.x = (v-115/2*w)/21;
+		dif.y = (v+115/2*w)/21;
+		dif.theta = 0.0;
 		pub_dif.publish(dif);
 		
 		ros::spinOnce();
+		rate.sleep();
 	}
 }
