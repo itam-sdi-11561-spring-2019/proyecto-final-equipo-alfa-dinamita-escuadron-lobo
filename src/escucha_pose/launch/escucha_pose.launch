@@ -1,0 +1,9 @@
+<launch>
+	
+	<arg name="bag_file" default="no_obstacles_1"/>
+	
+	<node pkg="rosbag" type="play" name="pose" args="/home/robotica/lab_principios_jch/final/rosbags/$(arg bag_file).bag"/>
+	
+	<node pkg="escucha_pose" type="escucha_pose_node" name="escucha_pose_node" output="screen"/>
+
+</launch>
