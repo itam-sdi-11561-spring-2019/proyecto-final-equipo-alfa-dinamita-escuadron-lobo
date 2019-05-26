@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 	
 	ros::Subscriber sub_pose = n.subscribe("/y_r0", 1000, &callbackPose);
-	ros::Subscriber sub_ball = n.subscribe("/objetivo", 1000, &callbackBall);
+	ros::Subscriber sub_ball = n.subscribe("/ball", 1000, &callbackBall); // Navegacion sin obstaculos...
 	ros::Publisher pub_dif = n.advertise<geometry_msgs::Pose2D> ("/pose_dif",1);
 	
 	ros::Rate rate(2);
