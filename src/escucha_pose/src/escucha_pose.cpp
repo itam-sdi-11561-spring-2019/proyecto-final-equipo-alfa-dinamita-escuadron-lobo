@@ -3,6 +3,8 @@
 #include <math.h>
 using namespace std;
 
+#define pi 3.1415926536
+
 float x=0, y=0, theta=0, bx=0, by=0, bt=0, dx=0, dy=0;
 
 void callbackPose(const geometry_msgs::Pose2D &poseRobot)
@@ -44,8 +46,8 @@ int main(int argc, char **argv)
 		alpha = atan2(dy,dx)-theta-atan(abs(dy/dx));
 		v = d/10;
 		w = alpha/5;
-		dif.x = (v-115/2*w)/21;
-		dif.y = (v+115/2*w)/21;
+		dif.x = (v-115/2*w)/21/2/pi;
+		dif.y = (v+115/2*w)/21/2/pi;
 		dif.theta = 0.0;
 		pub_dif.publish(dif);
 		
