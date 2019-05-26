@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 	{
 		float d, alpha, v, w;
 		d = sqrt(dx*dx+dy*dy);
-		alpha = atan2(dy,dx)-theta-atan(abs(dy/dx));
+		alpha = atan2(dy,dx)-theta;
 		v = d/10;
 		w = alpha/5;
 		dif.x = (v-115/2*w)/21/2/pi;
